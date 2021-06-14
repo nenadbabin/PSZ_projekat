@@ -1,4 +1,5 @@
 from data_interpreter.main_data_interpreter import Database
+import pandas as pd
 
 
 def load_data():

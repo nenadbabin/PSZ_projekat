@@ -1,8 +1,13 @@
+import enum
 from typing import List
-
 from pandas import DataFrame
 import math
 from collections import Counter
+
+
+class DistanceMetric(enum.Enum):
+    euclidean_distance = "euclidean_distance"
+    manhattan_distance = "manhattan_distance"
 
 
 class KNN:
@@ -19,8 +24,11 @@ class KNN:
                 square_root_k = square_root_k + 1
             self.k: int = square_root_k
 
-    def classify(self, data: DataFrame) -> dict[int, int]:
-        return self.__get_class(self.__euclidean_distance(data))
+    def classify(self, data: DataFrame, metric: DistanceMetric) -> dict[int, int]:
+        if metric == DistanceMetric.euclidean_distance:
+            return self.__get_class(self.__euclidean_distance(data))
+        elif metric == DistanceMetric.manhattan_distance:
+            return self.__get_class(self.__manhattan_distance(data))
 
     def __euclidean_distance(self, x: DataFrame) -> List[float]:
         distances: List[float] = []

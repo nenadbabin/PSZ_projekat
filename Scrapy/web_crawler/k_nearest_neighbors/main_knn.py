@@ -1,4 +1,4 @@
-from k_nearest_neighbors.KNN import KNN
+from k_nearest_neighbors.KNN import KNN, DistanceMetric
 from utility.helpers import load_data
 
 
@@ -20,9 +20,8 @@ def main():
         y_values['cena'][i] = new_value
 
     knn = KNN(input_data=x_values, correct_output_class=y_values)
-    pred_class = knn.classify(x_values.iloc[3])
+    pred_class = knn.classify(x_values.iloc[3], metric=DistanceMetric.manhattan_distance)
     print(pred_class)
-    pass
 
 
 if __name__ == "__main__":
