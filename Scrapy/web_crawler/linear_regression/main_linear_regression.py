@@ -1,36 +1,34 @@
 from data_interpreter.main_data_interpreter import Database
 import pandas as pd
-from linear_regression.lin_reg import LinearRegression
+from linear_regression.lin_reg import LinearRegression as MyLinearRegression, LinReg
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+from utility.helpers import load_data
 
 
 def main():
-    database = Database(host="localhost",
-                        user="root",
-                        password="nenad",
-                        database="psz_projekat")
+    x_values, y_values = load_data()
 
-    query = "select * from psz_projekat.nekretnina " \
-            "where grad = 'Beograd' and tip_ponude = 'Prodaja' and tip_nekretnine = 'Stan';"
 
-    database.cursor.execute(query)
-    data_frame = pd.DataFrame(database.cursor.fetchall())
-    data_frame.columns = ['id', 'tip_ponude', 'tip_nekretnine',
-                          'broj_soba', 'spratnost', 'sprat',
-                          'povrsina_placa', 'grejanje', 'grad',
-                          'lokacija', 'mikrolokacija', 'kvadratura',
-                          'parking', 'uknjizenost', 'terasa',
-                          'lift', 'tip_objekta', 'cena']
+    # lr_model = LinearRegression()
+    # lr_model.fit(x_values.to_numpy(), y_values)
+    # lr_preds = lr_model.predict(x_values)
+    # print(lr_preds)
+    # mse = mean_squared_error(y_values, lr_preds)
+    # print(mse)
 
-    x_values = data_frame[['kvadratura',
-                           # 'tip_objekta',
-                           'broj_soba',
-                           'spratnost']]
-    y_values = data_frame[['cena']]
+    # linear_regression = MyLinearRegression(input_data=x_values,
+    #                                      correct_output_values=y_values,
+    #                                      alpha=0.01)
+    # linear_regression.train()
 
-    linear_regression = LinearRegression(input_data=x_values,
-                                         correct_output_values=y_values,
-                                         alpha=1)
-    linear_regression.train()
+    linear_regression = LinReg()
+    linear_regression.fit(x_values.to_numpy(), y_values.to_numpy())
+    weights = linear_regression.weights
+    print(weights)
+    value = linear_regression.predict(x_values.iloc[0])
+    print(value)
     pass
 
 
