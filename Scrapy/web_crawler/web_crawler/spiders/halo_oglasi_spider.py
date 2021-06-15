@@ -197,4 +197,7 @@ class HaloOglasiSpider(Spider):
 
         item['cena'] = int(data_obj['OtherFields']['defaultunit_cena_d'] or 0)
 
+        item['x_pos'] = float(data_obj['GeoLocationRPT'].split(",")[0]) or 0
+        item['y_pos'] = float(data_obj['GeoLocationRPT'].split(",")[1]) or 0
+
         return item

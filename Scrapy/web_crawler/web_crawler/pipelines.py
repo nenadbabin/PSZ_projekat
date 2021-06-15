@@ -39,8 +39,10 @@ class WebCrawlerPipeline:
                     "terasa," \
                     "lift," \
                     "tip_objekta," \
-                    "cena) " \
-                    "values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                    "cena," \
+                    "x_pos," \
+                    "y_pos) " \
+                    "values (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
 
         values = (item['tip_ponude'],
                   item['tip_nekretnine'],
@@ -58,7 +60,9 @@ class WebCrawlerPipeline:
                   item['terasa'],
                   item['lift'],
                   item['tip_objekta'],
-                  item['cena']
+                  item['cena'],
+                  item['x_pos'],
+                  item['y_pos']
                   )
 
         self.cursor.execute(sql_query, values)

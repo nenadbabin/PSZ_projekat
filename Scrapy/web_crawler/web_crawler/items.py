@@ -27,3 +27,5 @@ class WebCrawlerItem(scrapy.Item):
     lift = scrapy.Field()
     tip_objekta = scrapy.Field()
     cena = scrapy.Field()
+    x_pos = scrapy.Field()
+    y_pos = scrapy.Field()

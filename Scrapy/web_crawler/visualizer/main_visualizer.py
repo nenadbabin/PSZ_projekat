@@ -2,31 +2,17 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from data_interpreter.main_data_interpreter import Database
-
+from utility.helpers import load_all_data
 
 # def addlabels_hbar(x,y):
 #     for i in range(len(x)):
 #         plt.text(y[i] + 5, i, y[i])
 
-
-database = Database(host="localhost",
-                        user="root",
-                        password="nenad",
-                        database="psz_projekat")
+data_frame = load_all_data()
 
 # a)
 # 10 najzastupljenijih delova Beograda koji imaju najveći broj nekretnina u ponudi
 # (i u sekciji za prodaju, i u sekciji za iznajmljivanje, zbirno).
-query = "select * from psz_projekat.nekretnina"
-
-database.cursor.execute(query)
-data_frame = pd.DataFrame(database.cursor.fetchall())
-data_frame.columns=['id', 'tip_ponude', 'tip_nekretnine',
-                    'broj_soba', 'spratnost', 'sprat',
-                    'povrsina_placa', 'grejanje', 'grad',
-                    'lokacija', 'mikrolokacija', 'kvadratura',
-                    'parking', 'uknjizenost', 'terasa',
-                    'lift', 'tip_objekta', 'cena']
 
 data = data_frame
 maska = data['grad'] == 'Beograd'

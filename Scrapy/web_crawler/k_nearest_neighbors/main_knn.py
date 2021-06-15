@@ -1,7 +1,8 @@
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
-from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy
-from utility.helpers import load_data
+from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy, split_data
+from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
 
 def main():
@@ -21,9 +22,19 @@ def main():
             new_value = 4
         y_values['cena'][i] = new_value
 
-    x_train, x_test, y_train, y_test = \
-        train_test_split(x_values, y_values, test_size=0.25, random_state=42, stratify=y_values)
-    knn = KNN(input_data=x_train, correct_output_class=y_train)
+    features_with_class = x_values.copy(deep=True)
+    features_with_class['klasa'] = y_values.copy(deep=True)
+
+    train_data, test_data = split_data(features_with_class)
+    train_data_x = train_data[X_FEATURE_LIST]
+    train_data_y = train_data[['klasa']]
+    test_data_x = test_data[X_FEATURE_LIST]
+    test_data_y = test_data[['klasa']]
+
+    # x_train, x_test, y_train, y_test = \
+    #     train_test_split(x_values, y_values, test_size=0.25, random_state=42, stratify=y_values)
+
+    knn = KNN(input_data=train_data_x, correct_output_class=train_data_y)
 
     confusion_matrix = [[0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0],
@@ -31,12 +42,12 @@ def main():
                         [0, 0, 0, 0, 0],
                         [0, 0, 0, 0, 0]]
 
-    for i in range(0, x_test.shape[0]):
-        pred_classes = knn.classify(x_test.iloc[i], metric=DistanceMetric.euclidean_distance)
+    for i in range(0, test_data_x.shape[0]):
+        pred_classes = knn.classify(test_data_x.iloc[i], metric=DistanceMetric.euclidean_distance)
         pred_class = get_predicted_class(pred_classes)
-        true_class = y_test.iloc[i].values.tolist()[0]
+        true_class = test_data_y.iloc[i].values.tolist()[0]
         confusion_matrix[pred_class][true_class] = confusion_matrix[pred_class][true_class] + 1
-        print(f"{x_test.iloc[i].values.tolist()} belongs to class {true_class}. Predicted class {pred_class}.")
+        print(f"{test_data_x.iloc[i].values.tolist()} belongs to class {true_class}. Predicted class {pred_class}.")
 
     accuracy = calculate_accuracy(confusion_matrix)
     print(f"Accuracy: {accuracy}")

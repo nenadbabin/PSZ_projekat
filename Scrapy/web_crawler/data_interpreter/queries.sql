@@ -56,7 +56,7 @@
 
 
 -- select * from psz_projekat.nekretnina
--- where tip_ponude = 'Prodaja' and grad = 'Beograd'
+-- where tip_ponude = 'Prodaja' and grad = 'Beograd'nekretnina
 
 select * from psz_projekat.nekretnina
 where grad = 'Beograd' and tip_ponude = 'Prodaja' and tip_nekretnine = 'Stan';
