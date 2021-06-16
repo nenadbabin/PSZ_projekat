@@ -16,8 +16,8 @@ class HaloOglasiSpider(Spider):
         urls: List[str] = [
             #'https://www.halooglasi.com/nekretnine/prodaja-kuca?page=1',
             #'https://www.halooglasi.com/nekretnine/izdavanje-kuca?page=1',
-            'https://www.halooglasi.com/nekretnine/prodaja-stanova?page=1',
-            #'https://www.halooglasi.com/nekretnine/izdavanje-stanova?page=1'
+            #'https://www.halooglasi.com/nekretnine/prodaja-stanova?page=1',
+            'https://www.halooglasi.com/nekretnine/izdavanje-stanova?page=1'
         ]
         for url in urls:
             yield Request(url=url, callback=self.parse)
