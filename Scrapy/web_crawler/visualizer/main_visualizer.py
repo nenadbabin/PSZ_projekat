@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from data_interpreter.main_data_interpreter import Database
 from utility.helpers import load_all_data
 
 # def addlabels_hbar(x,y):
@@ -20,7 +19,6 @@ data = data[maska]
 data_grupisano = data[['lokacija']].groupby('lokacija')
 data_agregirano = data_grupisano['lokacija'].agg(np.size).sort_values(ascending=False)
 data_agregirano = data_agregirano.head(10)
-# data_agregirano = data_agregirano.to_frame()  # type: pd.DataFrame
 delovi_beograda = data_agregirano.index
 
 prodaja = []
@@ -67,7 +65,10 @@ ax.bar_label(rects3, padding=3)
 fig.set_figwidth(15)
 fig.set_figheight(10)
 
+plt.title("Delovi Beograda sa najvecim brojem nekretnina u ponudi")
+plt.savefig('pictures/a.png')
 plt.show()
+
 
 # plt.figure(figsize = (15, 5))
 # xpoints = np.array(data_frame['deo_grada'])
@@ -111,6 +112,8 @@ y = np.array(brojevi_stanova)
 
 bar = ax.bar(x, y)
 ax.bar_label(bar, padding=3)
+plt.title("Broj stanova za prodaju prema kvadraturi u celoj Srbiji")
+plt.savefig('pictures/b.png')
 plt.show()
 
 
@@ -194,7 +197,8 @@ ax.bar_label(rects3, padding=3)
 
 fig.set_figwidth(15)
 fig.set_figheight(10)
-
+plt.title("Broj izgradjenih nekretnina po starosti")
+plt.savefig('pictures/c.png')
 plt.show()
 
 
@@ -233,6 +237,8 @@ for grad in gradovi:
         a.set_text(f"{brojevi[i]} ({round((brojevi[i] / np.array(brojevi).sum()) * 100, 2)})%")
 
     plt.title(grad)
+    plt.title(f"Broj nekretnina na prodaju/izdavanje - {grad}")
+    plt.savefig(f'pictures/d_{grad}.png')
     plt.show()
 
 
@@ -276,6 +282,7 @@ for i, a in enumerate(autotexts):
     a.set_text(f"{brojevi_nekretnina_na_prodaju[i]} ({round((brojevi_nekretnina_na_prodaju[i] / np.array(brojevi_nekretnina_na_prodaju).sum()) * 100, 2)})%")
 
 plt.title("Nekretnine na prodaju po opsezima cena")
+plt.savefig('pictures/e.png')
 plt.show()
 
 
@@ -302,4 +309,5 @@ for i, a in enumerate(autotexts):
     a.set_text(f"{nekretnine_parking[i]} ({round((nekretnine_parking[i] / np.array(nekretnine_parking).sum()) * 100, 2)})%")
 
 plt.title("Nekretnine na prodaju u Beogradu sa i bez parkinga")
+plt.savefig('pictures/f.png')
 plt.show()

@@ -1,5 +1,7 @@
 import math
 
+from pandas import DataFrame
+
 from data_interpreter.main_data_interpreter import Database
 import pandas as pd
 
@@ -57,7 +59,7 @@ def calculate_distance(x1: float, y1: float, x2: float, y2: float) -> float:
     return math.sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2))
 
 
-def load_all_data():
+def load_all_data() -> DataFrame:
     database = Database(host="localhost",
                         user="root",
                         password="nenad",
@@ -73,3 +75,5 @@ def load_all_data():
                           'lokacija', 'mikrolokacija', 'kvadratura',
                           'parking', 'uknjizenost', 'terasa',
                           'lift', 'tip_objekta', 'cena', 'x_pos', 'y_pos']
+
+    return data_frame
