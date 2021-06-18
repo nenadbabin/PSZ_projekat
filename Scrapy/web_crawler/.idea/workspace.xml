@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bbcae544-a63c-44b1-8adc-d80cbc4ea526" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/knn_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_nearest_neighbors/knn_utility.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/main_knn.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_nearest_neighbors/main_knn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/linear_regression_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/linear_regression/linear_regression_utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linear_regression/main_linear_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/linear_regression/main_linear_regression.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualizer/main_visualizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualizer/main_visualizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility/helpers.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,8 +62,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_visualizer">
-    <configuration name="Main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="web_crawler" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -68,12 +71,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/visualizer" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gui" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\PSZ_projekat\Scrapy\web_crawler\visualizer\main_visualizer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui/app.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -172,11 +175,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_visualizer" />
+        <item itemvalue="Python.app" />
         <item itemvalue="Python.main_linear_regression" />
+        <item itemvalue="Python.main_visualizer" />
         <item itemvalue="Python.main_knn" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.Main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -211,7 +214,10 @@
       <workItem from="1623773601028" duration="11945000" />
       <workItem from="1623861197429" duration="14793000" />
       <workItem from="1623939563709" duration="2049000" />
-      <workItem from="1623942693018" duration="13453000" />
+      <workItem from="1623942693018" duration="14308000" />
+      <workItem from="1624023064226" duration="5749000" />
+      <workItem from="1624037966914" duration="3908000" />
+      <workItem from="1624050036372" duration="3890000" />
     </task>
     <servers />
   </component>
@@ -251,9 +257,10 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/web_crawler$main_visualizer.coverage" NAME="main_visualizer Coverage Results" MODIFIED="1623966791375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualizer" />
     <SUITE FILE_PATH="coverage/web_crawler$test.coverage" NAME="test Coverage Results" MODIFIED="1623609578707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/linear_regression" />
-    <SUITE FILE_PATH="coverage/web_crawler$main_linear_regression.coverage" NAME="main_linear_regression Coverage Results" MODIFIED="1623962677339" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/linear_regression" />
+    <SUITE FILE_PATH="coverage/web_crawler$main_linear_regression.coverage" NAME="main_linear_regression Coverage Results" MODIFIED="1624026199716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/linear_regression" />
     <SUITE FILE_PATH="coverage/web_crawler$Main.coverage" NAME="Main Coverage Results" MODIFIED="1623175603555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_interpreter" />
     <SUITE FILE_PATH="coverage/web_crawler$main_knn.coverage" NAME="main_knn Coverage Results" MODIFIED="1623864713635" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/k_nearest_neighbors" />
+    <SUITE FILE_PATH="coverage/web_crawler$app.coverage" NAME="app Coverage Results" MODIFIED="1624053814516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui" />
     <SUITE FILE_PATH="coverage/web_crawler$Main__1_.coverage" NAME="Main (1) Coverage Results" MODIFIED="1623271978792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualizer" />
   </component>
 </project>

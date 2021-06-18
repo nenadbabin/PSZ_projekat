@@ -1,4 +1,5 @@
 import math
+from typing import List
 
 from pandas import DataFrame
 
@@ -17,7 +18,7 @@ CENTER_OF_BELGRADE_X = 44.8237
 CENTER_OF_BELGRADE_Y = 20.4526
 
 
-def load_data():
+def load_data(x_features: List[str] = X_FEATURE_LIST):
     database = Database(host="localhost",
                         user="root",
                         password="nenad",
@@ -49,7 +50,7 @@ def load_data():
         else:
             data_frame['tip_objekta_klasa'][i] = 3
 
-    x_values = data_frame[X_FEATURE_LIST]
+    x_values = data_frame[x_features]
     y_values = data_frame[Y_FEATURE_LIST]
 
     return x_values, y_values

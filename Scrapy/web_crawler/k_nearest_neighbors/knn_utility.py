@@ -23,7 +23,7 @@ def get_predicted_class(classes: dict) -> int:
     return index
 
 
-def split_data(data: DataFrame, split_ratio: float = 0.25):
+def split_data_knn(data: DataFrame, split_ratio: float = 0.25):
 
     shuffled_data = data.sample(frac=1).reset_index(drop=True)
 

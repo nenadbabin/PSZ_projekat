@@ -1,6 +1,6 @@
 import numpy as np
 from linear_regression.lin_reg import MultipleLinearRegression
-from linear_regression.linear_regression_utility import split_data
+from linear_regression.linear_regression_utility import split_data_lr
 from utility.helpers import load_data
 
 
@@ -13,7 +13,7 @@ def main():
     for i in range(x_values.shape[1]):
         x_values[:, i] = (x_values[:, i] - int(np.mean(x_values[:, i]))) / np.std(x_values[:, i])
 
-    x_train, y_train, x_test, y_test = split_data(x_values, y_values)
+    x_train, y_train, x_test, y_test = split_data_lr(x_values, y_values)
 
     regression = MultipleLinearRegression()
     weights_trained, train_loss, num_epochs = regression.train(x_train, y_train, epochs=200, alpha=0.00001)

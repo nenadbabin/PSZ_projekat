@@ -1,5 +1,5 @@
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
-from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy, split_data
+from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy, split_data_knn
 from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST
 from sklearn.model_selection import train_test_split
 import pandas as pd
@@ -25,7 +25,7 @@ def main():
     features_with_class = x_values.copy(deep=True)
     features_with_class['klasa'] = y_values.copy(deep=True)
 
-    train_data, test_data = split_data(features_with_class)
+    train_data, test_data = split_data_knn(features_with_class)
     train_data_x = train_data[X_FEATURE_LIST]
     train_data_y = train_data[['klasa']]
     test_data_x = test_data[X_FEATURE_LIST]
