@@ -1,12 +1,12 @@
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
 from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy, split_data_knn
-from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST
+from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST, load_data_from_csv
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
 
 def main():
-    x_values, y_values = load_data()
+    x_values, y_values = load_data_from_csv(path="../data/filtered_data.csv")
 
     for i in range(0, y_values.shape[0]):
         new_value: int = -1

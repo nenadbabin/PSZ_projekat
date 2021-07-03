@@ -1,11 +1,17 @@
 import numpy as np
 from linear_regression.lin_reg import MultipleLinearRegression
 from linear_regression.linear_regression_utility import split_data_lr
-from utility.helpers import load_data
+from utility.helpers import load_data, load_data_from_csv, plot
 
 
 def main():
-    x_values, y_values = load_data()
+    x_values, y_values = load_data_from_csv(path="../data/filtered_data.csv")
+
+    plot(x_values['kvadratura'], y_values['cena'], "Raspodela kvadratura-cena", "kvadratura", "cena")
+    plot(x_values['broj_soba'], y_values['cena'], "Raspodela broj_soba-cena", "broj_soba", "cena")
+    plot(x_values['spratnost'], y_values['cena'], "Raspodela spratnost-cena", "spratnost", "cena")
+    plot(x_values['udaljenost_od_centra'], y_values['cena'], "Raspodela udaljenost_od_centra-cena", "udaljenost_od_centra", "cena")
+    plot(x_values['tip_objekta_klasa'], y_values['cena'], "Raspodela tip_objekta_klasa-cena", "tip_objekta_klasa", "cena")
 
     x_values = x_values.to_numpy()
     y_values = y_values.to_numpy()

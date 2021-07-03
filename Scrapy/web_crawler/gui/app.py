@@ -1,3 +1,4 @@
+import threading
 from typing import List
 
 import numpy as np
@@ -61,12 +62,14 @@ class MyFrame(wx.Frame):
         self.radio_button_knn_menhetn = wx.RadioButton(panel, 22, label='Menhetn r.', pos=(115, 260))
 
         self.button_knn_ucitaj_podatke = wx.Button(panel, label='Ucitaj podatke', pos=(5, 290))
-        self.button_knn_ucitaj_podatke.Bind(wx.EVT_BUTTON, self.import_data_knn)
+        self.button_knn_ucitaj_podatke.Bind(wx.EVT_BUTTON, self.import_data_knn_event)
 
         self.button_knn_knn = wx.Button(panel, label='KNN', pos=(115, 290))
         self.button_knn_knn.Bind(wx.EVT_BUTTON, self.knn_event)
 
         self.Show()
+
+        self.lock = threading.Lock()
 
     def read_features(self) -> List[str]:
         x_features = []
@@ -88,6 +91,24 @@ class MyFrame(wx.Frame):
         return x_features
 
     def lin_reg_event(self, event):
+        access = self.lock.acquire(blocking=False)
+        if access:
+            thread = threading.Thread(target=self.lin_reg_thread)
+            thread.start()
+
+    def import_data_knn_event(self, event):
+        access = self.lock.acquire(blocking=False)
+        if access:
+            thread = threading.Thread(target=self.import_data_knn_thread)
+            thread.start()
+
+    def knn_event(self, event):
+        access = self.lock.acquire(blocking=False)
+        if access:
+            thread = threading.Thread(target=self.knn_thread)
+            thread.start()
+
+    def lin_reg_thread(self):
         cls()
 
         iterations = self.text_ctrl_lr_iteracije.GetValue()
@@ -137,7 +158,9 @@ class MyFrame(wx.Frame):
         test_pred, test_loss = regression.test(x_test, y_test, weights_trained)
         regression.plotLoss(train_loss, num_epochs)
 
-    def import_data_knn(self, event):
+        self.lock.release()
+
+    def import_data_knn_thread(self):
         cls()
         test_size = self.text_ctrl_knn_test.GetValue()
 
@@ -185,7 +208,9 @@ class MyFrame(wx.Frame):
 
         self.text_ctrl_knn_k.SetValue(str(self.knn.k))
 
-    def knn_event(self, event):
+        self.lock.release()
+
+    def knn_thread(self):
 
         if self.radio_button_knn_euklid.GetValue():
             metric = DistanceMetric.euclidean_distance
@@ -207,6 +232,8 @@ class MyFrame(wx.Frame):
 
         accuracy = calculate_accuracy(confusion_matrix)
         print(f"Accuracy: {accuracy}")
+
+        self.lock.release()
 
 
 if __name__ == '__main__':
