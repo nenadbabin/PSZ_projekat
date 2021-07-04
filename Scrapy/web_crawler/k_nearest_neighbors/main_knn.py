@@ -1,6 +1,6 @@
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
 from k_nearest_neighbors.knn_utility import get_predicted_class, calculate_accuracy, split_data_knn
-from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST, load_data_from_csv
+from utility.helpers import load_data, X_FEATURE_LIST, Y_FEATURE_LIST, load_data_from_csv, plot
 from sklearn.model_selection import train_test_split
 import pandas as pd
 
@@ -12,18 +12,26 @@ def main():
         new_value: int = -1
         if y_values['cena'][i] <= 49999:
             new_value = 0
-        if 50000 <= y_values['cena'][i] <= 99999:
+        elif 50000 <= y_values['cena'][i] <= 99999:
             new_value = 1
-        if 100000 <= y_values['cena'][i] <= 149000:
+        elif 100000 <= y_values['cena'][i] <= 149999:
             new_value = 2
-        if 150000 <= y_values['cena'][i] <= 199000:
+        elif 150000 <= y_values['cena'][i] <= 199999:
             new_value = 3
-        if y_values['cena'][i] >= 200000:
+        elif y_values['cena'][i] >= 200000:
             new_value = 4
         y_values['cena'][i] = new_value
 
     features_with_class = x_values.copy(deep=True)
     features_with_class['klasa'] = y_values.copy(deep=True)
+
+    plot(features_with_class['kvadratura'], features_with_class['klasa'], "Raspodela kvadratura-cena", "kvadratura", "klasa")
+    plot(features_with_class['broj_soba'], features_with_class['klasa'], "Raspodela broj_soba-cena", "broj_soba", "klasa")
+    plot(features_with_class['spratnost'], features_with_class['klasa'], "Raspodela spratnost-cena", "spratnost", "klasa")
+    plot(features_with_class['udaljenost_od_centra'], features_with_class['klasa'], "Raspodela udaljenost_od_centra-klasa",
+         "udaljenost_od_centra", "klasa")
+    plot(features_with_class['tip_objekta_klasa'], features_with_class['klasa'], "Raspodela tip_objekta_klasa-cena", "tip_objekta_klasa",
+         "cena")
 
     train_data, test_data = split_data_knn(features_with_class)
     train_data_x = train_data[X_FEATURE_LIST]

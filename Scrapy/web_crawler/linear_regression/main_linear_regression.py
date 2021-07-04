@@ -1,5 +1,5 @@
 import numpy as np
-from linear_regression.lin_reg import MultipleLinearRegression
+from linear_regression.lin_reg import LinearRegressionPSZ
 from linear_regression.linear_regression_utility import split_data_lr
 from utility.helpers import load_data, load_data_from_csv, plot
 
@@ -19,12 +19,14 @@ def main():
     for i in range(x_values.shape[1]):
         x_values[:, i] = (x_values[:, i] - int(np.mean(x_values[:, i]))) / np.std(x_values[:, i])
 
+    y_values = (y_values - int(np.mean(y_values))) / np.std(y_values)
+
     x_train, y_train, x_test, y_test = split_data_lr(x_values, y_values)
 
-    regression = MultipleLinearRegression()
-    weights_trained, train_loss, num_epochs = regression.train(x_train, y_train, epochs=200, alpha=0.00001)
-    test_pred, test_loss = regression.test(x_test, y_test, weights_trained)
-    regression.plotLoss(train_loss, num_epochs)
+    regression = LinearRegressionPSZ(x_train, y_train, alpha=0.00001, num_of_iter=200)
+    train_loss, num_epochs = regression.train()
+    test_pred, test_loss = regression.test(x_test, y_test)
+    regression.plot_loss(train_loss, num_epochs)
 
 
 if __name__ == "__main__":

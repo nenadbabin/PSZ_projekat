@@ -2,115 +2,70 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class MultipleLinearRegression:
+class LinearRegressionPSZ:
 
-    def __init__(self):
-        # No instance Variables required
+    def __init__(self, x_values: np.ndarray, true_y_values: np.ndarray, alpha: float = 0.0001, num_of_iter: int = 200):
+        self.x_values = x_values
+        self.true_y_values = true_y_values
+        self.alpha = alpha
+        self.num_of_iter = num_of_iter
+
+        self.num_of_data = self.x_values.shape[0]
+        self.num_of_features = self.x_values.shape[1]
+        self.weights = (np.random.randn(1, self.num_of_features) / np.sqrt(self.num_of_data))[0]
+        self.bias = (np.random.randn(1, 1) / np.sqrt(self.num_of_data))[0][0]
+
         pass
 
-    def forward(self, X, y, W):
-        """
-        Parameters:
-        X (array) : Independent Features
-        y (array) : Dependent Features/ Target Variable
-        W (array) : Weights
+    def __h(self, single_data_x_values: np.ndarray) -> float:
+        y_predicted = self.bias + sum(self.weights * single_data_x_values)
+        return y_predicted
 
-        Returns:
-        loss (float) : Calculated Sqaured Error Loss for y and y_pred
-        y_pred (array) : Predicted Target Variable
-        """
-        y_pred = sum(W * X)
-        loss = ((y_pred - y) ** 2) / 2  # Loss = Squared Error, we introduce 1/2 for ease in the calculation
-        return loss, y_pred
+    def predict(self, single_data_x_values: np.ndarray) -> float:
+        return self.__h(single_data_x_values)
 
-    def updateWeights(self, X, y_pred, y_true, W, alpha, index):
-        """
-        Parameters:
-        X (array) : Independent Features
-        y_pred (array) : Predicted Target Variable
-        y_true (array) : Dependent Features/ Target Variable
-        W (array) : Weights
-        alpha (float) : learning rate
-        index (int) : Index to fetch the corresponding values of W, X and y
+    @staticmethod
+    def __loss_function(y_predicted: float, true_y_value: float) -> float:
+        loss = pow(y_predicted - true_y_value, 2) / 2
+        return loss
 
-        Returns:
-        W (array) : Update Values of Weight
-        """
-        for i in range(X.shape[1]):
-            # alpha = learning rate, rest of the RHS is derivative of loss function
-            W[i] -= (alpha * (y_pred - y_true[index]) * X[index][i])
-        return W
+    def __update_weights(self, single_data_y_pred: float, index: int):
+        self.bias -= (self.alpha * (single_data_y_pred - self.true_y_values[index]))
+        for i in range(self.num_of_features):
+            self.weights[i] -= (self.alpha * (single_data_y_pred - self.true_y_values[index]) * self.x_values[index][i])
 
-    def train(self, X, y, epochs=10, alpha=0.001, random_state=0):
-        """
-        Parameters:
-        X (array) : Independent Feature
-        y (array) : Dependent Features/ Target Variable
-        epochs (int) : Number of epochs for training, default value is 10
-        alpha (float) : learning rate, default value is 0.001
-
-        Returns:
-        y_pred (array) : Predicted Target Variable
-        loss (float) : Calculated Sqaured Error Loss for y and y_pred
-        """
-
-        num_rows = X.shape[0]  # Number of Rows
-        num_cols = X.shape[1]  # Number of Columns
-        W = np.random.randn(1, num_cols) / np.sqrt(num_rows)  # Weight Initialization
-
-        # Calculating Loss and Updating Weights
+    def train(self):
         train_loss = []
         num_epochs = []
-        train_indices = [i for i in range(X.shape[0])]
-        for j in range(epochs):
+        train_indices = [i for i in range(self.num_of_data)]
+        for j in range(self.num_of_iter):
             cost = 0
-            np.random.seed(random_state)
+            np.random.seed(0)
             np.random.shuffle(train_indices)
             for i in train_indices:
-                loss, y_pred = self.forward(X[i], y[i], W[0])
+                y_predicted = self.__h(self.x_values[i])
+                loss = self.__loss_function(y_predicted, self.true_y_values[i])
                 cost += loss
-                W[0] = self.updateWeights(X, y_pred, y, W[0], alpha, i)
+                self.__update_weights(y_predicted, i)
             train_loss.append(cost)
             num_epochs.append(j)
-        return W[0], train_loss, num_epochs
+        return train_loss, num_epochs
 
-    def test(self, X_test, y_test, W_trained):
-        """
-        Parameters:
-        X_test (array) : Independent Features from the Test Set
-        y_test (array) : Dependent Features/ Target Variable from the Test Set
-        W_trained (array) : Trained Weights
-        test_indices (list) : Index to fetch the corresponding values of W_trained,
-                              X_test and y_test
-
-        Returns:
-        test_pred (list) : Predicted Target Variable
-        test_loss (list) : Calculated Sqaured Error Loss for y and y_pred
-        """
+    def test(self, x_test_set: np.ndarray, y_test_set: np.ndarray):
         test_pred = []
         test_loss = []
-        test_indices = [i for i in range(X_test.shape[0])]
+        test_indices = [i for i in range(x_test_set.shape[0])]
         for i in test_indices:
-            loss, y_test_pred = self.forward(X_test[i], W_trained, y_test[i])
+            y_test_pred = self.__h(x_test_set[i])
+            loss = self.__loss_function(y_test_pred, y_test_set[i])
             test_pred.append(y_test_pred)
             test_loss.append(loss)
         return test_pred, test_loss
 
-    def predict(self, W_trained, X_sample):
-        prediction = sum(W_trained * X_sample)
-        return prediction
-
-    def plotLoss(self, loss, epochs):
-        """
-        Parameters:
-        loss (list) : Calculated Sqaured Error Loss for y and y_pred
-        epochs (list): Number of Epochs
-
-        Returns: None
-        Plots a graph of Loss vs Epochs
-        """
+    @staticmethod
+    def plot_loss(loss, epochs):
         plt.plot(epochs, loss)
-        plt.xlabel('Number of Epochs')
-        plt.ylabel('Loss')
-        plt.title('Plot Loss')
+        plt.xlabel('Iteracija')
+        plt.ylabel('Greska')
+        plt.title('Vrednost fukncije greske po teracijama')
         plt.show()
