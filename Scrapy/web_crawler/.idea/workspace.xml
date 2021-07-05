@@ -2,31 +2,58 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbcae544-a63c-44b1-8adc-d80cbc4ea526" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_prodaja_izdavanje.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_uknjizenih.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_izdavanje.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplje_kuce.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplji_stanovi.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveca_kvadratura_stanovi.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najvece_kuce.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_broj_soba.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_plac_kuce.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_stanovi.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_novogradnja.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja_po_gradovima.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/KNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_nearest_neighbors/KNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/test.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/train.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-1.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes-page.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/quotes.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_crawler/spiders/halo_oglasi_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_crawler/spiders/halo_oglasi_spider.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/filtered_data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/raw_data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_prodaja_izdavanje.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_uknjizenih.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_izdavanje.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplje_kuce.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplji_stanovi.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveca_kvadratura_stanovi.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najvece_kuce.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_broj_soba.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_plac_kuce.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_stanovi.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_novogradnja.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja_po_gradovima.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/queries.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gui/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/KNN.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/knn_utility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/main_knn.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/junk_code.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/lin_reg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/linear_regression_utility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/main_linear_regression.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/new_lin_reg.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility/helpers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/main_visualizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/d_Beograd.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/d_Jagodina.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/d_Kragujevac.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/d_Niš.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/d_Novi Sad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/e.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/pictures/f.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualizer/visualizer_utility.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/items.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/middlewares.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/pipelines.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/spiders/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/spiders/halo_oglasi_spider.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +93,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -248,7 +275,7 @@
       <workItem from="1625382887241" duration="20996000" />
       <workItem from="1625409380626" duration="1557000" />
       <workItem from="1625421268084" duration="9739000" />
-      <workItem from="1625496935440" duration="7882000" />
+      <workItem from="1625496935440" duration="7992000" />
     </task>
     <servers />
   </component>
