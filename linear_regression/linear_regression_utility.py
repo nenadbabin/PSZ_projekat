@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def split_data_lr(X, y, test_size=0.25,):
+def split_data_lr(x_values_data_set, y_values_data_set, test_size: float = 0.3):
     np.random.seed(0)
-    indices = np.random.permutation(len(X))
-    data_test_size = int(X.shape[0] * test_size)
+    indices = np.random.permutation(len(x_values_data_set))
+    data_test_size = int(x_values_data_set.shape[0] * test_size)
 
     train_indices = indices[data_test_size:]
     test_indices = indices[:data_test_size]
-    X_train = X[train_indices]
-    y_train = y[train_indices]
-    X_test = X[test_indices]
-    y_test = y[test_indices]
-    return X_train, y_train, X_test, y_test
+    x_train = x_values_data_set[train_indices]
+    y_train = y_values_data_set[train_indices]
+    x_test = x_values_data_set[test_indices]
+    y_test = y_values_data_set[test_indices]
+    return x_train, y_train, x_test, y_test

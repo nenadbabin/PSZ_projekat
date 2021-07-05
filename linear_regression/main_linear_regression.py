@@ -23,10 +23,13 @@ def main():
 
     x_train, y_train, x_test, y_test = split_data_lr(x_values, y_values)
 
-    regression = LinearRegressionPSZ(x_train, y_train, alpha=0.00001, num_of_iter=200)
-    train_loss, num_epochs = regression.train()
-    test_pred, test_loss = regression.test(x_test, y_test)
-    regression.plot_loss(train_loss, num_epochs)
+    regression = LinearRegressionPSZ(x_train, y_train, alpha=0.00001, num_of_iter=500)
+    train_cost, num_epochs = regression.train()
+    _, RMSE_train = regression.test(x_train, y_train)
+    print(f"RMSE (train): {RMSE_train}")
+    _, RMSE_test = regression.test(x_test, y_test)
+    print(f"RMSE (test): {RMSE_test}")
+    regression.plot_loss(train_cost, num_epochs)
 
 
 if __name__ == "__main__":
