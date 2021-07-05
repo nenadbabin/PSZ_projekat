@@ -2,12 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbcae544-a63c-44b1-8adc-d80cbc4ea526" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gui/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/gui/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/main_knn.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_nearest_neighbors/main_knn.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/lin_reg.py" beforeDir="false" afterPath="$PROJECT_DIR$/linear_regression/lin_reg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/linear_regression_utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/linear_regression/linear_regression_utility.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linear_regression/main_linear_regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/linear_regression/main_linear_regression.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_prodaja_izdavanje.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/broj_uknjizenih.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_izdavanje.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplje_kuce.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najskuplji_stanovi.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveca_kvadratura_stanovi.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najvece_kuce.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_broj_soba.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_plac_kuce.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_najveci_stanovi.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_novogradnja.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/lista_prodaja_po_gradovima.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_nearest_neighbors/KNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_nearest_neighbors/KNN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/test.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linear_regression/train.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes-page.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/quotes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web_crawler/spiders/halo_oglasi_spider.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_crawler/spiders/halo_oglasi_spider.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,7 +86,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.app">
+  <component name="RunManager" selected="Python.main_data_interpreter">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="web_crawler" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -82,6 +101,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gui/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_data_interpreter" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="web_crawler" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_interpreter" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_interpreter/main_data_interpreter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -156,35 +197,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="web_crawler" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/linear_regression" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linear_regression/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_data_interpreter" />
+        <item itemvalue="Python.main_visualizer" />
         <item itemvalue="Python.app" />
         <item itemvalue="Python.main_linear_regression" />
         <item itemvalue="Python.main_knn" />
-        <item itemvalue="Python.main_visualizer" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +247,8 @@
       <workItem from="1625318444697" duration="8926000" />
       <workItem from="1625382887241" duration="20996000" />
       <workItem from="1625409380626" duration="1557000" />
-      <workItem from="1625421268084" duration="6949000" />
+      <workItem from="1625421268084" duration="9739000" />
+      <workItem from="1625496935440" duration="7882000" />
     </task>
     <servers />
   </component>
@@ -258,8 +278,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/data_interpreter/main_data_interpreter.py</url>
-          <line>44</line>
-          <option name="timeStamp" value="2" />
+          <line>52</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -278,12 +298,13 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/web_crawler$main_visualizer.coverage" NAME="main_visualizer Coverage Results" MODIFIED="1623966791375" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualizer" />
+    <SUITE FILE_PATH="coverage/web_crawler$main_visualizer.coverage" NAME="main_visualizer Coverage Results" MODIFIED="1625499115413" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualizer" />
     <SUITE FILE_PATH="coverage/web_crawler$test.coverage" NAME="test Coverage Results" MODIFIED="1623609578707" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/linear_regression" />
     <SUITE FILE_PATH="coverage/web_crawler$main_linear_regression.coverage" NAME="main_linear_regression Coverage Results" MODIFIED="1625398039882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/linear_regression" />
     <SUITE FILE_PATH="coverage/web_crawler$Main.coverage" NAME="Main Coverage Results" MODIFIED="1623175603555" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_interpreter" />
     <SUITE FILE_PATH="coverage/web_crawler$main_knn.coverage" NAME="main_knn Coverage Results" MODIFIED="1625327589943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/k_nearest_neighbors" />
     <SUITE FILE_PATH="coverage/web_crawler$app.coverage" NAME="app Coverage Results" MODIFIED="1625424919571" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gui" />
     <SUITE FILE_PATH="coverage/web_crawler$Main__1_.coverage" NAME="Main (1) Coverage Results" MODIFIED="1623271978792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/visualizer" />
+    <SUITE FILE_PATH="coverage/web_crawler$main_data_interpreter.coverage" NAME="main_data_interpreter Coverage Results" MODIFIED="1625503415584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_interpreter" />
   </component>
 </project>

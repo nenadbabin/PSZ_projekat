@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_izdavanje.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_najskuplje_kuce.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_najskuplji_stanovi.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_najveca_kvadratura_stanovi.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_najvece_kuce.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_novogradnja.csv" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/data_interpreter/lista_prodaja_po_gradovima.csv" charset="windows-1252" />
+  </component>
+</project>

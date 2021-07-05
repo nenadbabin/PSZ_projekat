@@ -139,11 +139,6 @@ class HaloOglasiSpider(Spider):
         :param response:
         :return:
         """
-        # selector: Selector = Selector(response=response)
-        # var: List[Any] = selector.xpath("//script[contains(., 'QuidditaEnvironment.CurrentClassified=')]/text()").extract()
-        #
-        # for nesto in var:
-        #     print(var)
 
         pattern = re.compile('QuidditaEnvironment.CurrentClassified=(.*?); for')
         script = response.xpath("//script[contains(., 'QuidditaEnvironment.CurrentClassified=')]/text()")
@@ -152,18 +147,52 @@ class HaloOglasiSpider(Spider):
         data_obj = json.loads(data)
 
         item = WebCrawlerItem()
+
         item['tip_ponude'] = data_obj['CategoryNames'][2]
+
         item['tip_nekretnine'] = data_obj['OtherFields']['tip_nekretnine_s']
-        item['broj_soba'] = data_obj['OtherFields'].get('broj_soba_s') or 0
+
+        if data_obj['OtherFields'].get('broj_soba_s'):
+            item['broj_soba'] = data_obj['OtherFields'].get('broj_soba_s')
+        else:
+            item['broj_soba'] = 0
         if '+' in item['broj_soba']:
             item['broj_soba'] = '5.0'
-        item['spratnost'] = int(data_obj['OtherFields'].get('sprat_od_s') or 0)
-        item['povrsina_placa'] = float(data_obj['OtherFields'].get('defaultunit_povrsina_placa_d') or 0)
-        item['grejanje'] = data_obj['OtherFields'].get('grejanje_s') or ""
-        item['grad'] = data_obj['OtherFields'].get('grad_s') or ""
-        item['lokacija'] = data_obj['OtherFields'].get('lokacija_s') or ""
-        item['mikrolokacija'] = data_obj['OtherFields'].get('mikrolokacija_s') or ""
-        item['kvadratura'] = int(data_obj['OtherFields'].get('defaultunit_kvadratura_d') or 0)
+
+        if data_obj['OtherFields'].get('sprat_od_s'):
+            item['spratnost'] = int(data_obj['OtherFields'].get('sprat_od_s'))
+        else:
+            item['spratnost'] = 0
+
+        if data_obj['OtherFields'].get('defaultunit_povrsina_placa_d'):
+            item['povrsina_placa'] = float(data_obj['OtherFields'].get('defaultunit_povrsina_placa_d'))
+        else:
+            item['povrsina_placa'] = 0
+
+        if data_obj['OtherFields'].get('grejanje_s'):
+            item['grejanje'] = data_obj['OtherFields'].get('grejanje_s')
+        else:
+            item['grejanje'] = ""
+
+        if data_obj['OtherFields'].get('grad_s'):
+            item['grad'] = data_obj['OtherFields'].get('grad_s')
+        else:
+            item['grad'] = ""
+
+        if data_obj['OtherFields'].get('lokacija_s'):
+            item['lokacija'] = data_obj['OtherFields'].get('lokacija_s')
+        else:
+            item['lokacija'] = ""
+
+        if data_obj['OtherFields'].get('mikrolokacija_s'):
+            item['mikrolokacija'] = data_obj['OtherFields'].get('mikrolokacija_s')
+        else:
+            item['mikrolokacija'] = ""
+
+        if data_obj['OtherFields'].get('defaultunit_kvadratura_d'):
+            item['kvadratura'] = int(data_obj['OtherFields'].get('defaultunit_kvadratura_d'))
+        else:
+            item['kvadratura'] = -1
 
         if data_obj['OtherFields'].get('ostalo_ss') and "Parking" in data_obj['OtherFields'].get('ostalo_ss'):
             item['parking'] = "DA"
@@ -191,13 +220,23 @@ class HaloOglasiSpider(Spider):
             if "PR" in data_obj['OtherFields'].get('sprat_s'):
                 item['sprat'] = 0
             else:
-             item['sprat'] = data_obj['OtherFields'].get('sprat_s')
+                item['sprat'] = data_obj['OtherFields'].get('sprat_s')
         else:
             item['sprat'] = 0
 
-        item['cena'] = int(data_obj['OtherFields']['defaultunit_cena_d'] or 0)
+        if data_obj['OtherFields']['defaultunit_cena_d']:
+            item['cena'] = int(data_obj['OtherFields']['defaultunit_cena_d'])
+        else:
+            item['cena'] = 0
 
-        item['x_pos'] = float(data_obj['GeoLocationRPT'].split(",")[0]) or 0
-        item['y_pos'] = float(data_obj['GeoLocationRPT'].split(",")[1]) or 0
+        if data_obj['GeoLocationRPT'].split(",")[0]:
+            item['x_pos'] = float(data_obj['GeoLocationRPT'].split(",")[0])
+        else:
+            item['x_pos'] = 0
+
+        if data_obj['GeoLocationRPT'].split(",")[1]:
+            item['y_pos'] = float(data_obj['GeoLocationRPT'].split(",")[1])
+        else:
+            item['y_pos'] = 0
 
         return item

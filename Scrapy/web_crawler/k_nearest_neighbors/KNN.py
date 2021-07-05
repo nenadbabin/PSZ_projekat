@@ -20,7 +20,7 @@ class KNN:
             self.k: int = k
         else:
             square_root_k: int = int(math.sqrt(self.number_of_data + 1))
-            if square_root_k % 2 == 0:
+            if square_root_k % 5 == 0:
                 square_root_k = square_root_k + 1
             self.k: int = square_root_k
 
@@ -57,11 +57,7 @@ class KNN:
     def __get_class(self, distances: List[float]) -> dict[int, int]:
         indexes: List[int] = list(range(0, self.number_of_data))
         for i in range(self.number_of_data):
-            # Last i elements are already in place
             for j in range(0, self.number_of_data - i - 1):
-                # traverse the array from 0 to n-i-1
-                # Swap if the element found is greater
-                # than the next element
                 if distances[j] > distances[j + 1]:
                     distances[j], distances[j + 1] = distances[j + 1], distances[j]
                     indexes[j], indexes[j + 1] = indexes[j + 1], indexes[j]
