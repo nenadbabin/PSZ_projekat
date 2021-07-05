@@ -5,12 +5,13 @@ import pandas as pd
 import numpy as np
 import wx
 import os
+import math
 
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
 from k_nearest_neighbors.knn_utility import split_data_knn, get_predicted_class, calculate_accuracy
 from linear_regression.lin_reg import LinearRegressionPSZ
 from linear_regression.linear_regression_utility import split_data_lr
-from utility.helpers import load_data, X_FEATURE_LIST, load_data_from_csv
+from utility.helpers import load_data, X_FEATURE_LIST, load_data_from_csv, CENTER_OF_BELGRADE_X, CENTER_OF_BELGRADE_Y
 
 
 def cls():
@@ -91,19 +92,24 @@ class MyFrame(wx.Frame):
         self.static_text_pred_spratnost = wx.StaticText(panel, label="Spratnost:", pos=(500, 100))
         self.text_ctrl_pred_spratnost = wx.TextCtrl(panel, pos=(580, 100))
 
-        self.static_text_pred_udaljenost_od_centra = wx.StaticText(panel, label="Udaljenost:", pos=(500, 130))
-        self.text_ctrl_pred_udaljenost_od_centra = wx.TextCtrl(panel, pos=(580, 130))
+        self.static_text_pred_udaljenost_od_centra = wx.StaticText(panel, label="Koordinate:", pos=(500, 130))
+        self.text_ctrl_pred_udaljenost_od_centra_x = wx.TextCtrl(panel, pos=(580, 130), size=(50, -1))
+        self.text_ctrl_pred_udaljenost_od_centra_y = wx.TextCtrl(panel, pos=(640, 130), size=(50, -1))
 
         self.static_text_pred_tip_objekta = wx.StaticText(panel, label="Tip objekta:", pos=(500, 160))
         self.radio_pred_novo_g = wx.RadioButton(panel, 33, label='novogradnja', pos=(580, 160), style=wx.RB_GROUP)
         self.radio_pred_staro_g = wx.RadioButton(panel, 44, label='starogradnja', pos=(690, 160))
         self.radio_pred_ne_koristi_g = wx.RadioButton(panel, 55, label='ne koristi odliku', pos=(580, 180))
+        self.radio_pred_ne_koristi_g.SetValue(True)
 
         self.static_text_pred_cena = wx.StaticText(panel, label="Cena:", pos=(500, 210))
         self.static_text_pred_cena_izlaz = wx.StaticText(panel, label="", pos=(580, 210))
 
-        self.button_pred_lr = wx.Button(panel, label='Linearna regresija', pos=(500, 250))
-        self.button_pred_lr.Bind(wx.EVT_BUTTON, self.lr_pred_event)
+        self.button_pred_lr = wx.Button(panel, label='Linearna regresija', pos=(590, 250))
+        self.button_pred_lr.Bind(wx.EVT_BUTTON, self.lr_predict_event)
+
+        self.button_pred_lr = wx.Button(panel, label='Treniraj', pos=(500, 250))
+        self.button_pred_lr.Bind(wx.EVT_BUTTON, self.lr_train_event)
 
         self.static_text_pred_k_knn = wx.StaticText(panel, label="K:", pos=(500, 290))
         self.text_ctrl_pred_k_knn = wx.TextCtrl(panel, pos=(580, 290))
@@ -118,6 +124,9 @@ class MyFrame(wx.Frame):
 
         self.Show()
 
+        self.lr_model = None
+        self.lr_means = None
+        self.lr_std = None
         self.lock = threading.Lock()
 
     def read_features(self) -> List[str]:
@@ -148,8 +157,17 @@ class MyFrame(wx.Frame):
             x_features.append(float(self.text_ctrl_pred_broj_soba.GetValue()))
         if self.text_ctrl_pred_spratnost.GetValue() != "":
             x_features.append(float(self.text_ctrl_pred_spratnost.GetValue()))
-        if self.text_ctrl_pred_udaljenost_od_centra.GetValue() != "":
-            x_features.append(float(self.text_ctrl_pred_udaljenost_od_centra.GetValue()))
+        if self.text_ctrl_pred_udaljenost_od_centra_x.GetValue() != "" and \
+                self.text_ctrl_pred_udaljenost_od_centra_y.GetValue() != "":
+            distance = math.sqrt(
+                pow(
+                    (CENTER_OF_BELGRADE_X - float(self.text_ctrl_pred_udaljenost_od_centra_x.GetValue())),
+                    2)
+                + pow(
+                    (CENTER_OF_BELGRADE_Y - float(self.text_ctrl_pred_udaljenost_od_centra_y.GetValue())),
+                    2)
+            )
+            x_features.append(distance)
         if not self.radio_pred_ne_koristi_g.GetValue():
             if self.radio_pred_novo_g.GetValue():
                 x_features.append(1)
@@ -176,10 +194,16 @@ class MyFrame(wx.Frame):
             thread = threading.Thread(target=self.knn_thread)
             thread.start()
 
-    def lr_pred_event(self, event):
+    def lr_train_event(self, event):
         access = self.lock.acquire(blocking=False)
         if access:
-            thread = threading.Thread(target=self.lr_pred_thread)
+            thread = threading.Thread(target=self.lr_train_thread)
+            thread.start()
+
+    def lr_predict_event(self, event):
+        access = self.lock.acquire(blocking=False)
+        if access:
+            thread = threading.Thread(target=self.lr_predict_thread)
             thread.start()
 
     def knn_pred_event(self, event):
@@ -194,9 +218,9 @@ class MyFrame(wx.Frame):
             thread = threading.Thread(target=self.knn_pred_load_data_thread)
             thread.start()
 
-    def lr_pred_thread(self):
+    def lr_train_thread(self):
         cls()
-        print("Predikcija linearnom regresijom zapoceta...")
+        # print("Predikcija linearnom regresijom zapoceta...")
 
         print("Ucitavanje podataka...")
         x_features = self.read_features()
@@ -206,7 +230,11 @@ class MyFrame(wx.Frame):
         print("Ucitavanje podataka zavreseno.")
 
         print("Skaliranje odlika...")
+        self.lr_means = []
+        self.lr_std = []
         for i in range(x_values.shape[1]):
+            self.lr_means.append(int(np.mean(x_values[:, i])))
+            self.lr_std.append(np.std(x_values[:, i]))
             x_values[:, i] = (x_values[:, i] - int(np.mean(x_values[:, i]))) / np.std(x_values[:, i])
 
         # y_values = (y_values - int(np.mean(y_values))) / np.std(y_values)
@@ -219,12 +247,23 @@ class MyFrame(wx.Frame):
         print("Obucavanje...")
         regression = LinearRegressionPSZ(x_train, y_train)
         regression.train()
-        x_values = self.read_features_for_prediction()
-        value = regression.predict(np.array(x_values))
-        self.static_text_pred_cena_izlaz.SetLabel(str(value[0]))
+        self.lr_model = regression
         print("Obucavanje zavrseno.")
 
-        print("Predikcija linearnom regresijom zavrsena.")
+        # print("Predikcija linearnom regresijom zavrsena.")
+        self.lock.release()
+
+    def lr_predict_thread(self):
+        cls()
+        x_values = self.read_features_for_prediction()
+
+        for i in range(0, len(x_values)):
+            value = x_values[i]
+            scaled_value = (value - self.lr_means[i]) / self.lr_std[i]
+            x_values[i] = scaled_value
+
+        value = self.lr_model.predict(np.array(x_values))
+        self.static_text_pred_cena_izlaz.SetLabel(str(value[0]))
         self.lock.release()
 
     def knn_pred_load_data_thread(self):
@@ -316,9 +355,12 @@ class MyFrame(wx.Frame):
 
         print("Obucavanje...")
         regression = LinearRegressionPSZ(x_train, y_train, alpha=alpha, num_of_iter=iterations)
-        train_loss, num_epochs = regression.train()
-        test_pred, test_loss = regression.test(x_test, y_test)
-        regression.plot_loss(train_loss, num_epochs)
+        train_cost, num_epochs = regression.train()
+        _, RMSE_train = regression.test(x_train, y_train)
+        print(f"RMSE (skup za obucavanje): {RMSE_train}")
+        _, RMSE_test = regression.test(x_test, y_test)
+        print(f"RMSE (skup za testiranje): {RMSE_test}")
+        regression.plot_loss(train_cost, num_epochs)
         print("Obucavanje zavrseno.")
 
         print("Linearna regresija zavrsena.")
