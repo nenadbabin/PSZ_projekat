@@ -1,5 +1,14 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
+
+def plot_error_function(loss, epochs):
+    plt.plot(epochs, loss)
+    plt.xlabel('Iteracija')
+    plt.ylabel('Greska')
+    plt.title('Vrednost funkcije greske po iteracijama')
+    plt.savefig(f"pictures/Vrednost fukncije greske po iteracijama.png")
+    plt.show()
 
 def split_data_lr(x_values_data_set, y_values_data_set, test_size: float = 0.3):
     np.random.seed(0)

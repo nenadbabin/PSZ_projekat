@@ -1,6 +1,6 @@
 import numpy as np
 from linear_regression.lin_reg import LinearRegressionPSZ
-from linear_regression.linear_regression_utility import split_data_lr
+from linear_regression.linear_regression_utility import split_data_lr, plot_error_function
 from utility.helpers import load_data, load_data_from_csv, plot
 
 
@@ -29,7 +29,7 @@ def main():
     print(f"RMSE (train): {RMSE_train}")
     _, RMSE_test = regression.test(x_test, y_test)
     print(f"RMSE (test): {RMSE_test}")
-    regression.plot_loss(train_cost, num_epochs)
+    plot_error_function(train_cost, num_epochs)
 
 
 if __name__ == "__main__":

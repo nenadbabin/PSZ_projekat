@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 class LinearRegressionPSZ:
@@ -15,7 +14,8 @@ class LinearRegressionPSZ:
         self.weights = (np.random.randn(1, self.num_of_features) / np.sqrt(self.num_of_data))[0]
         self.bias = (np.random.randn(1, 1) / np.sqrt(self.num_of_data))[0][0]
 
-        pass
+    def num_of_features(self) -> int:
+        return self.num_of_features
 
     def __h(self, single_data_x_values: np.ndarray) -> float:
         y_predicted = self.bias + sum(self.weights * single_data_x_values)
@@ -64,11 +64,3 @@ class LinearRegressionPSZ:
 
         RMSE = np.sqrt((np.sum(square_diffs)) / x_test_set.shape[0])
         return test_pred, RMSE
-
-    @staticmethod
-    def plot_loss(loss, epochs):
-        plt.plot(epochs, loss)
-        plt.xlabel('Iteracija')
-        plt.ylabel('Greska')
-        plt.title('Vrednost fukncije greske po teracijama')
-        plt.show()

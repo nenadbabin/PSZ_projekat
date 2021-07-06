@@ -117,5 +117,5 @@ def plot(x_values, y_values, title, x_axis_label, y_axis_label):
     plt.ylabel(y_axis_label)
     plt.title(title)
 
-    # function to show the plot
+    plt.savefig(f"pictures/{title}.png")
     plt.show()

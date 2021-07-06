@@ -20,7 +20,7 @@ def cls():
 
 class MyFrame(wx.Frame):
     def __init__(self):
-        super().__init__(parent=None, title='PSZ', size=(840, 400))
+        super().__init__(parent=None, title='PSZ', size=(800, 400))
         panel = wx.Panel(self)
 
         # ODLIKE ###############################
@@ -127,6 +127,7 @@ class MyFrame(wx.Frame):
         self.lr_model = None
         self.lr_means = None
         self.lr_std = None
+        self.knn_model = None
         self.lock = threading.Lock()
 
     def read_features(self) -> List[str]:
@@ -220,7 +221,6 @@ class MyFrame(wx.Frame):
 
     def lr_train_thread(self):
         cls()
-        # print("Predikcija linearnom regresijom zapoceta...")
 
         print("Ucitavanje podataka...")
         x_features = self.read_features()
@@ -250,11 +250,18 @@ class MyFrame(wx.Frame):
         self.lr_model = regression
         print("Obucavanje zavrseno.")
 
-        # print("Predikcija linearnom regresijom zavrsena.")
         self.lock.release()
 
     def lr_predict_thread(self):
         cls()
+
+        print("Predikcija linearom regresijom zapoceta...")
+
+        if not self.lr_model:
+            print("Greska: Nije kreiran model linearne regresije.")
+            self.lock.release()
+            return
+
         x_values = self.read_features_for_prediction()
 
         for i in range(0, len(x_values)):
@@ -262,8 +269,15 @@ class MyFrame(wx.Frame):
             scaled_value = (value - self.lr_means[i]) / self.lr_std[i]
             x_values[i] = scaled_value
 
+        if len(x_values) != self.lr_model.num_of_features():
+            print("Greska: Model nema isti broj odlika kao i uneti podatak.")
+            self.lock.release()
+            return
+
         value = self.lr_model.predict(np.array(x_values))
         self.static_text_pred_cena_izlaz.SetLabel(str(value[0]))
+
+        print("Predikcija linearom regresijom zavresema.")
         self.lock.release()
 
     def knn_pred_load_data_thread(self):
@@ -273,6 +287,12 @@ class MyFrame(wx.Frame):
     def knn_pred_thread(self):
         cls()
         print("KNN predikcija zapoceta...")
+
+        if not self.knn_model:
+            print("Greska: Nije kreiran KNN model.")
+            self.lock.release()
+            return
+
         self.static_text_pred_cena_izlaz.SetLabel("")
 
         if self.radio_button_knn_euklid.GetValue():
@@ -282,7 +302,12 @@ class MyFrame(wx.Frame):
 
         x_values = self.read_features_for_prediction()
 
-        pred_classes = self.knn.classify(pd.Series(x_values), metric=metric)
+        if len(x_values) != self.knn_model.num_of_features():
+            print("Greska: Model nema isti broj odlika kao i uneti podatak.")
+            self.lock.release()
+            return
+
+        pred_classes = self.knn_model.classify(pd.Series(x_values), metric=metric)
         pred_class = get_predicted_class(pred_classes)
 
         if pred_class == 0:
@@ -314,6 +339,7 @@ class MyFrame(wx.Frame):
                 iterations = 200
         except ValueError:
             print("Broj iteracija nije ceo broj.")
+            self.lock.release()
             return
 
         try:
@@ -323,6 +349,7 @@ class MyFrame(wx.Frame):
                 alpha = 0.00001
         except ValueError:
             print("Broj alfa nije broj u pokretnom zarezu.")
+            self.lock.release()
             return
 
         try:
@@ -332,6 +359,7 @@ class MyFrame(wx.Frame):
                 test_size = 0.25
         except ValueError:
             print("Procenat podataka za testiranje nije broj u pokretnom zarezu.")
+            self.lock.release()
             return
 
         x_features = self.read_features()
@@ -379,6 +407,7 @@ class MyFrame(wx.Frame):
                     test_size = 0.25
             except ValueError:
                 print("Procenat podataka za testiranje nije broj u pokretnom zarezu.")
+                self.lock.release()
                 return
         else:
             test_size = 0.0
@@ -419,14 +448,18 @@ class MyFrame(wx.Frame):
         self.test_data_x = test_data_x
         self.test_data_y = test_data_y
 
-        print("Inicijalizovanje KNN algoritma...")
-        self.knn = KNN(input_data=train_data_x, correct_output_class=train_data_y)
-        print("Inicijalizovanje KNN algoritma zavrseno.")
-
         if not full_data_set:
-            self.text_ctrl_knn_k.SetValue(str(self.knn.k))
+            print("Inicijalizovanje KNN algoritma...")
+            self.knn = KNN(input_data=train_data_x, correct_output_class=train_data_y)
+            print("Inicijalizovanje KNN algoritma zavrseno.")
+
+            self.text_ctrl_knn_k.SetValue(str(self.knn.k()))
         else:
-            self.text_ctrl_pred_k_knn.SetValue(str(self.knn.k))
+            print("Inicijalizovanje KNN algoritma...")
+            self.knn_model = KNN(input_data=train_data_x, correct_output_class=train_data_y)
+            print("Inicijalizovanje KNN algoritma zavrseno.")
+
+            self.text_ctrl_pred_k_knn.SetValue(str(self.knn.k()))
 
         if unlock is True:
             self.lock.release()
