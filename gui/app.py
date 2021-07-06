@@ -10,7 +10,7 @@ import math
 from k_nearest_neighbors.KNN import KNN, DistanceMetric
 from k_nearest_neighbors.knn_utility import split_data_knn, get_predicted_class, calculate_accuracy
 from linear_regression.lin_reg import LinearRegressionPSZ
-from linear_regression.linear_regression_utility import split_data_lr
+from linear_regression.linear_regression_utility import split_data_lr, plot_error_function
 from utility.helpers import load_data, X_FEATURE_LIST, load_data_from_csv, CENTER_OF_BELGRADE_X, CENTER_OF_BELGRADE_Y
 
 
@@ -46,11 +46,11 @@ class MyFrame(wx.Frame):
 
         self.static_text_lr_iteracije = wx.StaticText(panel, label="Broj iteracija:", pos=(5, 40))
         self.text_ctrl_lr_iteracije = wx.TextCtrl(panel, pos=(80, 40))
-        self.text_ctrl_lr_iteracije.SetValue("200")
+        self.text_ctrl_lr_iteracije.SetValue("500")
 
         self.static_text_lr_alfa = wx.StaticText(panel, label="Alfa:", pos=(5, 70))
         self.text_ctrl_lr_alfa = wx.TextCtrl(panel, pos=(80, 70))
-        self.text_ctrl_lr_alfa.SetValue("0.0001")
+        self.text_ctrl_lr_alfa.SetValue("0.00001")
 
         self.static_text_lr_test = wx.StaticText(panel, label="Test:", pos=(5, 100))
         self.text_ctrl_lr_test = wx.TextCtrl(panel, pos=(80, 100))
@@ -388,7 +388,7 @@ class MyFrame(wx.Frame):
         print(f"RMSE (skup za obucavanje): {RMSE_train}")
         _, RMSE_test = regression.test(x_test, y_test)
         print(f"RMSE (skup za testiranje): {RMSE_test}")
-        regression.plot_loss(train_cost, num_epochs)
+        plot_error_function(train_cost, num_epochs)
         print("Obucavanje zavrseno.")
 
         print("Linearna regresija zavrsena.")

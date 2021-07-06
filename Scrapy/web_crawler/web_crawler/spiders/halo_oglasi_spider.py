@@ -14,9 +14,9 @@ class HaloOglasiSpider(Spider):
 
     def start_requests(self):
         urls: List[str] = [
-            #'https://www.halooglasi.com/nekretnine/prodaja-kuca?page=1',
-            #'https://www.halooglasi.com/nekretnine/izdavanje-kuca?page=1',
-            #'https://www.halooglasi.com/nekretnine/prodaja-stanova?page=1',
+            'https://www.halooglasi.com/nekretnine/prodaja-kuca?page=1',
+            'https://www.halooglasi.com/nekretnine/izdavanje-kuca?page=1',
+            'https://www.halooglasi.com/nekretnine/prodaja-stanova?page=1',
             'https://www.halooglasi.com/nekretnine/izdavanje-stanova?page=1'
         ]
         for url in urls:
@@ -40,9 +40,10 @@ class HaloOglasiSpider(Spider):
             yield Request(product_absolute_url, callback=self.parse_product)
 
         if len(product_relative_urls):
-            page_num = int(response.url.split("?page=", 1)[1]) + 1
-            print(response.url.split("?", 1)[0] + "?page=" + str(page_num))
-            yield response.follow(response.url.split("?", 1)[0] + "?page=" + str(page_num), callback=self.parse)
+            response_split = response.url.split("?page=", 1)
+            current_page = int(response_split[1])
+            next_page = current_page + 1
+            yield response.follow(f"{response_split[0]}?page={next_page}", callback=self.parse)
 
     def parse_product(self, response: HtmlResponse):
         """
