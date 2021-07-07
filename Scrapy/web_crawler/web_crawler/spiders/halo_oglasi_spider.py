@@ -141,10 +141,9 @@ class HaloOglasiSpider(Spider):
         :return:
         """
 
-        pattern = re.compile('QuidditaEnvironment.CurrentClassified=(.*?); for')
+        pattern = re.compile('QuidditaEnvironment.CurrentClassified=(.*?);')
         script = response.xpath("//script[contains(., 'QuidditaEnvironment.CurrentClassified=')]/text()")
         data = script.re(pattern)[0]
-        re.sub('style=\\".*?', '', data)
         data_obj = json.loads(data)
 
         item = WebCrawlerItem()

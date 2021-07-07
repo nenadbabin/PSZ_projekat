@@ -66,7 +66,6 @@ class WebCrawlerPipeline:
                   )
 
         self.cursor.execute(sql_query, values)
-
         self.conn.commit()
 
         return item
