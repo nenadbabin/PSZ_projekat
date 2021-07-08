@@ -336,7 +336,7 @@ class MyFrame(wx.Frame):
             if iterations != '':
                 iterations = int(iterations)
             else:
-                iterations = 200
+                iterations = 500
         except ValueError:
             print("Broj iteracija nije ceo broj.")
             self.lock.release()
@@ -356,7 +356,7 @@ class MyFrame(wx.Frame):
             if test_size != '':
                 test_size = float(test_size)
             else:
-                test_size = 0.25
+                test_size = 0.3
         except ValueError:
             print("Procenat podataka za testiranje nije broj u pokretnom zarezu.")
             self.lock.release()
@@ -415,7 +415,7 @@ class MyFrame(wx.Frame):
         x_features = self.read_features()
 
         print("Ucitavanje podataka...")
-        x_values, y_values = load_data_from_csv(path="../data/filtered_data.csv")
+        x_values, y_values = load_data_from_csv(path="../data/filtered_data.csv", x_features=x_features)
         print("Ucitavanje podataka zavrseno.")
 
         for i in range(0, y_values.shape[0]):
@@ -450,16 +450,16 @@ class MyFrame(wx.Frame):
 
         if not full_data_set:
             print("Inicijalizovanje KNN algoritma...")
-            self.knn = KNN(input_data=train_data_x, correct_output_class=train_data_y)
+            self.knn_model = KNN(input_data=train_data_x, correct_output_class=train_data_y)
             print("Inicijalizovanje KNN algoritma zavrseno.")
 
-            self.text_ctrl_knn_k.SetValue(str(self.knn.k()))
+            self.text_ctrl_knn_k.SetValue(str(self.knn_model.k()))
         else:
             print("Inicijalizovanje KNN algoritma...")
             self.knn_model = KNN(input_data=train_data_x, correct_output_class=train_data_y)
             print("Inicijalizovanje KNN algoritma zavrseno.")
 
-            self.text_ctrl_pred_k_knn.SetValue(str(self.knn.k()))
+            self.text_ctrl_pred_k_knn.SetValue(str(self.knn_model.k()))
 
         if unlock is True:
             self.lock.release()
@@ -485,7 +485,7 @@ class MyFrame(wx.Frame):
         print("4 - cena >= 200 000")
         print("Primena KNN algoritma na podatke iz skupa za testiranje...")
         for i in range(0, self.test_data_x.shape[0]):
-            pred_classes = self.knn.classify(self.test_data_x.iloc[i], metric=metric)
+            pred_classes = self.knn_model.classify(self.test_data_x.iloc[i], metric=metric)
             pred_class = get_predicted_class(pred_classes)
             true_class = self.test_data_y.iloc[i].values.tolist()[0]
             confusion_matrix[pred_class][true_class] = confusion_matrix[pred_class][true_class] + 1

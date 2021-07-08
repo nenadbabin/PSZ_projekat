@@ -8,7 +8,7 @@ def plot_error_function(loss, epochs):
     plt.xlabel('Iteracija')
     plt.ylabel('Greska')
     plt.title('Vrednost funkcije greske po iteracijama')
-    plt.savefig(f"pictures/Vrednost fukncije greske po iteracijama.png")
+    plt.savefig(f"pictures/Vrednost funkcije greske po iteracijama.png")
     plt.show()
 
 
